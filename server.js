@@ -132,10 +132,10 @@ app.get('/rooms', async(req,res,next)=> {
 
 app.get('/rooms/:id', async(req,res,next)=> {
   const id = req.params.id
-  const [ player, room ] = await Promise.all([
+  const [ players, room ] = await Promise.all([
     Player.findAll({
-      where: {
-        id:id
+      where:{
+        roomId:id
       }
     }),
     Room.findAll({
@@ -166,6 +166,12 @@ app.get('/rooms/:id', async(req,res,next)=> {
                   `
                 }).join('')}
             <ul>
+            <h3>PLAYER IN THE ROOM</h3>
+            ${players.map(player=> {
+              return `
+                <li>${player.username}</li>
+              `
+            })}
           </div>
         </div>
     </body>

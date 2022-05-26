@@ -25,12 +25,14 @@ const Room = conn.define('room', {
   }
 })
 
+Player.belongsTo(Room)
+Room.hasMany(Player)
 
 
 const syncAndSeed = async()=> {
   try{
     await conn.sync({ force:true })
-    
+
     const lory = await Promise.all([Player.create({username:'lory'})])
     const [tom, bob, joe, moe] = await Promise.all(
       ['tom', 'bob', 'joe', 'moe'].map( n => {
@@ -43,7 +45,9 @@ const syncAndSeed = async()=> {
         return Room.create({ roomName:n })
       })
     )
-
+    
+    tom.roomId=room1.id
+    tom.save()
   }
   catch(ex){
     console.log(ex)
