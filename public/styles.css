@@ -1,3 +1,20 @@
 body {
-  color: green
+  color: green;
+}
+
+nav{
+  display: flex;
+  justify-content: space-around;
+  padding: 1em 0em;
+}
+
+.selected {
+  background-color: aqua;
+}
+
+.mainDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
